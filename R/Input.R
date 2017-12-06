@@ -5,14 +5,17 @@
 
 Input <- function(X, Y, ObjectiveFunction, Probs, P, Initialize, mu, Stop, Iterations){
   # Test X
-  if( !is.matrix(X) )  stop("X has to be a matrix of numbers")  
+  if( !is.matrix(X) )  stop("X has to be a matrix of numbers", call. = F)  
   if( !is.numeric(X) ) stop("X has to be a matrix of numbers")  
   if( ncol(X) < 3) stop("Why are you running a genetic algorithm with that few covariates?!")
   
   # test Y
   if( !is.vector(Y) & !(is.matrix(Y))) 
                        stop("Y has to be a vector or matrix of numbers")
-  if( !is.numeric(Y) ) stop("Y has to be a vector or matrix of numbers")  
+  if( !is.numeric(Y) ) stop("Y has to be a vector or matrix of numbers")
+
+  
+  
   
   # Test ObjectiveFunction
   if( typeof(ObjectiveFunction) != "closure" ) stop("ObjectiveFunction has to be a function")
