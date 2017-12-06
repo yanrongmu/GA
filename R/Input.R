@@ -1,0 +1,45 @@
+############ This is the Input function #########
+# It checks wheter the input to the global function are of the correct form
+
+########### Last Updated by Hector 11/30 ###################
+
+Input <- function(X, Y, ObjectiveFunction, Probs, P, Initialize, mu, Stop, Iterations){
+  # Test X
+  if( !is.matrix(X) )  stop("X has to be a matrix of numbers")  
+  if( !is.numeric(X) ) stop("X has to be a matrix of numbers")  
+  if( ncol(X) < 3) stop("Why are you running a genetic algorithm with that few covariates?!")
+  
+  # test Y
+  if( !is.vector(Y) & !(is.matrix(Y))) 
+                       stop("Y has to be a vector or matrix of numbers")
+  if( !is.numeric(Y) ) stop("Y has to be a vector or matrix of numbers")  
+  
+  # Test ObjectiveFunction
+  if( typeof(ObjectiveFunction) != "closure" ) stop("ObjectiveFunction has to be a function")
+  
+  # Test Probs
+  if( typeof(Probs) != "closure" ) stop("Probs has to be a function")
+  
+  # Test P
+  if( length(P) != 1)  stop("Only provides one population size")
+  if( !is.numeric(P) ) stop("P has to be an integer")
+  if( round(P) != P )  stop("P has to be an integer")
+  if( P %% 2 != 0) stop ("The population size has to be even")
+  
+  # Test Initialize
+  if( typeof(Initialize) != "closure" & !is.vector(Initialize) &
+      !is.matrix(Initialize)) 
+                       stop("Initialize has to be a vector or matrix")
+  
+  # Test mu
+  if( length(mu) != 1) stop("Only provides one mutation rate")
+  if( mu > 1 | mu < 0) stop("The mutation rate has to be between 0 and 1")
+  
+  # Test Stop
+  if( typeof(Stop) != "closure" ) stop("Stop has to be a function")
+  
+  # Test Iterations
+  if( length(Iterations) != 1)  stop("Only provides one maximum number of iterations")
+  if( !is.numeric(Iterations) ) stop("Iterations has to be an integer")
+  if( round(Iterations) != Iterations ) stop("Iterations has to be an integer")
+}
