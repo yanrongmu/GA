@@ -3,8 +3,6 @@
 
 ########### Last Updated by Joanne 12/6 ############
 
-library(testthat)
-
 context("Mutation function")
 
 test_that("Mutation function takes a matrix of children and mutates some genomes", {
