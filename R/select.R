@@ -30,14 +30,14 @@
 # source("NextGen.R", chdir = TRUE)
 
 select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
-                   P = 2 * ncol(X), Initialize = Initialize(ncol(X), P),
-                   mu = 1 / ncol(X), Stop = Stop, Iterations, ...){
+                   P = 2 * ncol(X), Initialized = Initialize(ncol(X), P),
+                   mu = 1 / ncol(X), StopFunction = Stop, Iterations, ...){
 
   # Lots of checks on the variables
   Input(X, Y, ObjectiveFunction, Probs, P, Initialize, mu, Stop, Iterations)
 
   #Initialize the population
-  Gen <- Initialize
+  Gen <- Initialized
 
   # Initialize the stopping criterions
   i <- 0
