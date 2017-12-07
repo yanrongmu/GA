@@ -14,22 +14,21 @@ test_that("ParentSelection creates a list of two P/2 by n matrices", {
                               ObjectiveFunction = AIC,
                               Probs = Ranking),
               "list")
-  expect_length(ParentSelection(LastGen = matrix(rbinom(200, 1, 0.5), nrow = 20), 
+  expect_length(ParentSelection(LastGen = matrix(rbinom(200, 1, 0.5), nrow = 20),
                                 X = matrix(rbinom(200, 1, 0.5), nrow = 20),
                                 Y = matrix(rbinom(200, 1, 0.5), nrow = 20),
                                 ObjectiveFunction = AIC,
                                 Probs = Ranking),
                 2)
-  expect_is(ParentSelection(LastGen = matrix(rbinom(200, 1, 0.5), nrow = 20), 
+  expect_true(is.matrix(ParentSelection(LastGen = matrix(rbinom(200, 1, 0.5), nrow = 20),
                                 X = matrix(rbinom(200, 1, 0.5), nrow = 20),
                                 Y = matrix(rbinom(200, 1, 0.5), nrow = 20),
                                 ObjectiveFunction = AIC,
-                                Probs = Ranking)[1],
-                "matrix")
-  expect_equal(dim(ParentSelection(LastGen = matrix(rbinom(200, 1, 0.5), nrow = 20), 
+                                Probs = Ranking)$Parent1))
+  expect_equal(dim(ParentSelection(LastGen = matrix(rbinom(200, 1, 0.5), nrow = 20),
                                    X = matrix(rbinom(200, 1, 0.5), nrow = 20),
                                    Y = matrix(rbinom(200, 1, 0.5), nrow = 20),
                                    ObjectiveFunction = AIC,
-                                   Probs = Ranking)[1]), 
+                                   Probs = Ranking)$Parent1),
                c(10, 10))
 })
