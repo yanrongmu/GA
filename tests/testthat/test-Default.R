@@ -2,7 +2,6 @@
 
 ########### Last Updated by Joanne 12/6 ###################
 
-library(testthat)
 
 context("default functions")
 
@@ -37,3 +36,4 @@ test_that("Stop returns TRUE or FALSE", {
                  ),
             "logical")
 })
+
