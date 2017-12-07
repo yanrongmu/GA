@@ -5,8 +5,6 @@
 
 ########### Last Updated by Joanne 12/6 ############
 
-library(testthat)
-
 context("ParentSelection function")
 
 test_that("ParentSelection creates a list of two P/2 by n matrices", {
