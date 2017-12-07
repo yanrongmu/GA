@@ -5,27 +5,27 @@
 \title{select Function}
 \usage{
 select(X, Y, ObjectiveFunction = AIC, Probs = Ranking, P = 2 * ncol(X),
-  Initialize = Initialize(ncol(X), P), mu = 1/ncol(X), Stop = Stop,
-  Iterations, ...)
+  Initialized = Initialize(ncol(X), P), mu = 1/ncol(X),
+  StopFunction = Stop, Iterations, ...)
 }
 \arguments{
-\item{X}{A matrix of numbers.}
+\item{X}{A n*p matrix of predictors.}
 
-\item{Y}{A vector or matrix of numbers.}
+\item{Y}{A n*1 matrix of responses.}
 
-\item{ObjectiveFunction}{A function. Defaults to AIC.}
+\item{ObjectiveFunction}{An objective criterion/fitness function. Defaults to AIC.}
 
-\item{Probs}{A function. Defaults to Ranking.}
+\item{Probs}{The probability of parents being selected. Defaults to Ranking.}
 
-\item{P}{An integer. Must be even.}
+\item{P}{Population size for generation. Must be an even integer. Defaults to 2p.}
 
-\item{Initialize}{A vector or matrix.}
+\item{Initialized}{A matrix initialized the population. Defaults to Initialize(p, P).}
 
-\item{mu}{The mutation rate has to be a number between 0 and 1.}
+\item{mu}{The mutation rate has to be a number between 0 and 1. Defaults to 1/p.}
 
-\item{Stop}{A function.}
+\item{StopFunction}{A stop criterion. Defaults to Stop function.}
 
-\item{Iterations}{An integer.}
+\item{Iterations}{Number of iterations.}
 }
 \value{
 Return the fittest individual in the population.
