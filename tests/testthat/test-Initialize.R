@@ -1,8 +1,6 @@
 ############ TEST: Initialize function #########
 ########### Last Updated by Joanne 12/6 ############
 
-library(testthat)
-
 context("Initialize function")
 
 test_that("Initialize creates a p by P matrix of 1s and 0s", {
