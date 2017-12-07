@@ -15,7 +15,7 @@ Input <- function(X, Y, ObjectiveFunction, Probs, P, Initialize, mu, Stop, Itera
   if( !is.numeric(Y) ) stop("Y has to be a vector or matrix of numbers", call. = F)
 
   if( nrow(Y) != nrow(X) ) 
-    stop("X and Y should have the same numer of observations", call. = F)
+    stop("X and Y should have the same number of observations", call. = F)
   
   
   # Test ObjectiveFunction
