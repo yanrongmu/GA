@@ -4,7 +4,6 @@
 
 ########### Last Updated by Joanne 12/6 ############
 
-library(testthat)
 
 context("Crossover function")
 
