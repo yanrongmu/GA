@@ -8,7 +8,7 @@
 #' This function implement a genetic algorithm for variable selection in regression problems.
 #'
 #' @param X A matrix of predictors.
-#' @param Y A vector of responses.
+#' @param Y A matrix of responses.
 #' @param ObjectiveFunction A function. Defaults to AIC.
 #' @param Probs A function. Defaults to Ranking.
 #' @param P An integer. Must be even.
@@ -33,6 +33,9 @@ select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
                    P = 2 * ncol(X), Initialize = Initialize(ncol(X), P),
                    mu = 1 / ncol(X), Stop = Stop, Iterations, ...){
 
+  # Adaptive, if Y is a vector instead of a matrix 
+  Y <- matrix(Y)
+  
   # Lots of checks on the variables
   Input(X, Y, ObjectiveFunction, Probs, P, Initialize, mu, Stop, Iterations)
 

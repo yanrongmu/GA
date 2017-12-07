@@ -10,9 +10,8 @@ Input <- function(X, Y, ObjectiveFunction, Probs, P, Initialize, mu, Stop, Itera
   if( ncol(X) < 3) stop("Why are you running a genetic algorithm with that few covariates?!", call. = F)
   
   # test Y
-  if( !is.vector(Y) & !(is.matrix(Y))) 
-                       stop("Y has to be a vector or matrix of numbers", call. = F)
-  if( !is.numeric(Y) ) stop("Y has to be a vector or matrix of numbers", call. = F)
+  if(!(is.matrix(Y))) stop("Y has to be a matrix of numbers", call. = F)
+  if(!is.numeric(Y))  stop("Y has to be a matrix of numbers", call. = F)
 
   if( nrow(Y) != nrow(X) ) 
     stop("X and Y should have the same number of observations", call. = F)
