@@ -41,6 +41,7 @@ select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
 
   #Initialize the population
   Gen <- Initialize
+  FitnessGen <- ObjectiveFunction(X, Y, Gen)
 
   # Initialize the stopping criterions
   i <- 0
@@ -49,15 +50,17 @@ select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
   # Run the algorithm
   while(i < Iterations & !Stopping){
     # Span the next generation
-    NewGen <- NextGen(LastGen = Gen, X, Y, ObjectiveFunction, Probs, mu)
+    NewGen <- NextGen(LastGen = Gen, X, Y,
+                      FitnessLastGen = FitnessGen, Probs, mu)
 
     # Check if the algorithm stops there
-    Stopping <- Stop(X, Y, LastGen = Gen, NewGen, ObjectiveFunction)
+    FitnessNewGen <- ObjectiveFunction(X, Y, NewGen)
+    Stopping <- Stop(FitnessLastGen = FitnessGen, FitnessNewGen)
     i <- i + 1
     Gen <- NewGen
+    FitnessGen <- FitnessNewGen
   }
 
   # Return the fittest individual in the population
-  Fitness <- ObjectiveFunction(X, Y, Gen)
-  return( Gen[which.max(Fitness), ] )
+  return( Gen[which.max(FitnessGen), ] )
 }

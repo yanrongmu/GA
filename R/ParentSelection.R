@@ -5,14 +5,11 @@
 
 ########### Last Updated by Hector 11/30 ############
 
-ParentSelection <- function(LastGen, X, Y, ObjectiveFunction, Probs){
+ParentSelection <- function(LastGen, X, Y, FitnessLastGen, Probs){
   P <- nrow(LastGen)
   
-  # Compute the fitness of each individual
-  Fitness <- ObjectiveFunction(X, Y, LastGen)
-  
   # Compute the probability of choosing each individual
-  Proba <- Probs(Fitness)
+  Proba <- Probs(FitnessLastGen)
   
   #Initialize the parents each pair of parents
   Parent1 <- matrix(0, ncol = ncol(LastGen), nrow = P/2)

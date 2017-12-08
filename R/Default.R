@@ -10,7 +10,7 @@ AIC <- function(X, Y, Gen){
   for (i in 1:P){
     # The AIC is the sum of the MSE plus the complexity penalty
     lm_fit <- lm(Y ~ X[, Gen[i,]] )
-    AICPop[i] <- nrow(X) * log(lm_fit$residuals^2) + 2 * sum(Gen[i,])
+    AICPop[i] <- nrow(X) * log(sum(lm_fit$residuals^2)) + 2 * sum(Gen[i,])
   }
   
   # Return the AIC
@@ -22,13 +22,11 @@ Ranking <- function(Fitness){
   return( 2* rank(Fitness) / (P * (P+1)) )
 }
   
-Stop <- function(X, Y, LastGen, NewGen, ObjectiveFunction){
+Stop <- function(FitnessLastGen, FitnessNewGen){
   # Compute the fitness of the best candidate in the previous generation
-  FitnessOldGen <- ObjectiveFunction(X, Y, Gen = LastGen)
-  BestOldGen <- max(FitnessOldGen)
+  BestOldGen <- max(FitnessLastGen)
   
   # Compute the fitness of the best candidate in the new generation
-  FitnessNewGen <- ObjectiveFunction(X, Y, NewGen)
   BestNewGen <- max(FitnessNewGen)
   
   # Return whether the increase is smaller than 0.1%

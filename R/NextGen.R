@@ -6,12 +6,12 @@
 # source("Crossover.R")
 # source("Mutation.R")
 
-NextGen <- function(LastGen, X, Y, ObjectiveFunction, Probs, mu){
+NextGen <- function(LastGen, X, Y, FitnessLastGen, Probs, mu){
   p <- ncol(X)
   P <- nrow(LastGen)
 
   # Select the parents
-  Parents <- ParentSelection(LastGen, X, Y, ObjectiveFunction, Probs)
+  Parents <- ParentSelection(LastGen, X, Y, FitnessLastGen, Probs)
 
   # Do Crossover between the Parents
   Kids <- Crossover(Parents)
