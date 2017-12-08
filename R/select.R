@@ -51,12 +51,9 @@ select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
   Input(X, Y, ObjectiveFunction, Probs, P, Initialize, mu, Stop, Iterations)
 
   #Initialize the population
-<<<<<<< HEAD
-  Gen <- Initialize
-  FitnessGen <- ObjectiveFunction(X, Y, Gen)
-=======
   Gen <- Initialized
->>>>>>> 2d8b2449686138b6c2ca68b5d5cacdc9f416a32d
+  FitnessGen <- ObjectiveFunction(X, Y, Gen)
+  
 
   # Initialize the stopping criterions
   i <- 0
