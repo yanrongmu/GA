@@ -6,7 +6,7 @@
 \usage{
 select(X, Y, ObjectiveFunction = AIC, Probs = Ranking, P = 2 * ncol(X),
   Initialized = Initialize(ncol(X), P), mu = 1/ncol(X),
-  StopFunction = Stop, Iterations, ...)
+  StopFunction = Stop, Iterations, nCores = 1, ...)
 }
 \arguments{
 \item{X}{A n*p matrix of predictors.}
@@ -26,6 +26,8 @@ select(X, Y, ObjectiveFunction = AIC, Probs = Ranking, P = 2 * ncol(X),
 \item{StopFunction}{A stop criterion. Defaults to Stop function.}
 
 \item{Iterations}{Number of iterations.}
+
+\item{nCores}{Number of cores used for parallelization. Defaults to 1.}
 }
 \value{
 Return the fittest individual in the population.
