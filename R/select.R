@@ -7,6 +7,7 @@
 #'
 #' This function implement a genetic algorithm for variable selection in regression problems.
 #'
+<<<<<<< HEAD
 #' @param X A matrix of predictors.
 #' @param Y A matrix of responses.
 #' @param ObjectiveFunction A function. Defaults to AIC.
@@ -16,8 +17,18 @@
 #' @param mu The mutation rate has to be a number between 0 and 1.
 #' @param Stop A function.
 #' @param Iterations An integer.
+=======
+#' @param X A n*p matrix of predictors.
+#' @param Y A n*1 matrix of responses.
+#' @param ObjectiveFunction An objective criterion/fitness function. Defaults to AIC.
+#' @param Probs The probability of parents being selected. Defaults to Ranking.
+#' @param P Population size for generation. Must be an even integer. Defaults to 2p.
+#' @param Initialized A matrix initialized the population. Defaults to Initialize(p, P).
+#' @param mu The mutation rate has to be a number between 0 and 1. Defaults to 1/p.
+#' @param StopFunction A stop criterion. Defaults to Stop function.
+#' @param Iterations Number of iterations.
+>>>>>>> 2d8b2449686138b6c2ca68b5d5cacdc9f416a32d
 #' @return Return the fittest individual in the population.
-#' @importFrom stats.
 #' @export
 #' @examples
 #' select()
@@ -30,8 +41,8 @@
 # source("NextGen.R", chdir = TRUE)
 
 select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
-                   P = 2 * ncol(X), Initialize = Initialize(ncol(X), P),
-                   mu = 1 / ncol(X), Stop = Stop, Iterations, ...){
+                   P = 2 * ncol(X), Initialized = Initialize(ncol(X), P),
+                   mu = 1 / ncol(X), StopFunction = Stop, Iterations, ...){
 
   # Adaptive, if Y is a vector instead of a matrix 
   Y <- matrix(Y)
@@ -40,8 +51,12 @@ select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
   Input(X, Y, ObjectiveFunction, Probs, P, Initialize, mu, Stop, Iterations)
 
   #Initialize the population
+<<<<<<< HEAD
   Gen <- Initialize
   FitnessGen <- ObjectiveFunction(X, Y, Gen)
+=======
+  Gen <- Initialized
+>>>>>>> 2d8b2449686138b6c2ca68b5d5cacdc9f416a32d
 
   # Initialize the stopping criterions
   i <- 0

@@ -3,7 +3,7 @@
 
 ########### Last Updated by Hector 11/30 ###################
 
-Input <- function(X, Y, ObjectiveFunction, Probs, P, Initialize, mu, Stop, Iterations){
+Input <- function(X, Y, ObjectiveFunction, Probs, P, Initialized, mu, StopFunction, Iterations){
   # Test X
   if( !is.matrix(X) )  stop("X has to be a matrix of numbers", call. = F)  
   if( !is.numeric(X) ) stop("X has to be a matrix of numbers", call. = F)  
@@ -29,17 +29,17 @@ Input <- function(X, Y, ObjectiveFunction, Probs, P, Initialize, mu, Stop, Itera
   if( round(P) != P )  stop("P has to be an integer", call. = F)
   if( P %% 2 != 0) stop ("The population size has to be even", call. = F)
   
-  # Test Initialize
-  if( typeof(Initialize) != "closure" & !is.vector(Initialize) &
-      !is.matrix(Initialize)) 
-                       stop("Initialize has to be a vector or matrix", call. = F)
+  # Test Initialized
+  if( typeof(Initialized) != "closure" & !is.vector(Initialized) &
+      !is.matrix(Initialized)) 
+                       stop("InitializeFunction has to be a vector or matrix", call. = F)
   
   # Test mu
   if( length(mu) != 1) stop("Only provides one mutation rate", call. = F)
   if( mu > 1 | mu < 0) stop("The mutation rate has to be between 0 and 1", call. = F)
   
-  # Test Stop
-  if( typeof(Stop) != "closure" ) stop("Stop has to be a function", call. = F)
+  # Test StopFunction
+  if( typeof(StopFunction) != "closure" ) stop("StopFunction has to be a function", call. = F)
   
   # Test Iterations
   if( length(Iterations) != 1)  
