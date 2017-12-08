@@ -2,19 +2,34 @@
 
 ########### Last Updated by Hector 11/30 ###################
 
-AIC <- function(X, Y, Gen){
+AIC <- function(X, Y, Gen, nCores){
   P <- nrow(Gen)
   
-  AICPop <- rep(0, P)
-  # Compute the AIC for each individual
-  for (i in 1:P){
-    # The AIC is the sum of the MSE plus the complexity penalty
-    lm_fit <- lm(Y ~ X[, Gen[i,]] )
-    AICPop[i] <- nrow(X) * log(sum(lm_fit$residuals^2)) + 2 * sum(Gen[i,])
+  if(nCores ==1){
+      AICPop <- rep(0, P)
+    # Compute the AIC for each individual
+    for (i in 1:P){
+      # The AIC is the sum of the MSE plus the complexity penalty
+      lm_fit <- lm(Y ~ X[, Gen[i,]] )
+      AICPop[i] <- nrow(X) * log(sum(lm_fit$residuals^2)) + 2 * sum(Gen[i,])
+    }
+    
+    # Return the AIC
+    return(AICPop)
   }
   
-  # Return the AIC
-  return(AICPop)
+  if(nCores > 1){
+    library(doParallel)
+    registerDoParallel(nCores) 
+    
+    # Compute the AIC for each individual
+    AICPop <-  <- foreach (i = 1:P) %dopar% {
+      # The AIC is the sum of the MSE plus the complexity penalty
+      lm_fit <- lm(Y ~ X[, Gen[i,]] )
+      AICPop[i] <- nrow(X) * log(sum(lm_fit$residuals^2)) + 2 * sum(Gen[i,])
+    }
+    return(unlist(AICPop))
+  }
 }
 
 Ranking <- function(Fitness){

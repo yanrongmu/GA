@@ -39,17 +39,19 @@
 
 select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
                    P = 2 * ncol(X), Initialized = Initialize(ncol(X), P),
-                   mu = 1 / ncol(X), StopFunction = Stop, Iterations, ...){
+                   mu = 1 / ncol(X), StopFunction = Stop, Iterations,
+                   nCores = 1, ...){
 
   # Adaptive, if Y is a vector instead of a matrix 
   Y <- matrix(Y)
   
   # Lots of checks on the variables
-  Input(X, Y, ObjectiveFunction, Probs, P, Initialize, mu, Stop, Iterations)
+  Input(X, Y, ObjectiveFunction, Probs, P,
+        Initialize, mu, Stop, Iterations, nCores)
 
   #Initialize the population
   Gen <- Initialized
-  FitnessGen <- ObjectiveFunction(X, Y, Gen)
+  FitnessGen <- ObjectiveFunction(X, Y, Gen, nCores)
   
 
   # Initialize the stopping criterions
@@ -63,7 +65,7 @@ select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
                       FitnessLastGen = FitnessGen, Probs, mu)
 
     # Check if the algorithm stops there
-    FitnessNewGen <- ObjectiveFunction(X, Y, NewGen)
+    FitnessNewGen <- ObjectiveFunction(X, Y, NewGen, nCores)
     Stopping <- Stop(FitnessLastGen = FitnessGen, FitnessNewGen)
     i <- i + 1
     Gen <- NewGen
