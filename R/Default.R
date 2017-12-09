@@ -5,7 +5,11 @@
 AIC <- function(X, Y, Gen, nCores){
   P <- nrow(Gen)
 
+<<<<<<< HEAD
   if(nCores ==1){
+=======
+  if(nCores == 1){
+>>>>>>> cfe050b16235eefca8a8ca0e9a7a67ff790f10f6
       AICPop <- rep(0, P)
     # Compute the AIC for each individual
     for (i in 1:P){
@@ -23,7 +27,11 @@ AIC <- function(X, Y, Gen, nCores){
     registerDoParallel(nCores)
 
     # Compute the AIC for each individual
+<<<<<<< HEAD
     AICPop <-  foreach (i = 1:P) %dopar% {
+=======
+    AICPop <- foreach (i = 1:P) %dopar% {
+>>>>>>> cfe050b16235eefca8a8ca0e9a7a67ff790f10f6
       # The AIC is the sum of the MSE plus the complexity penalty
       lm_fit <- lm(Y ~ X[, Gen[i,]] )
       AICPop[i] <- nrow(X) * log(sum(lm_fit$residuals^2)) + 2 * sum(Gen[i,])

@@ -7,15 +7,6 @@
 #'
 #' This function implement a genetic algorithm for variable selection in regression problems.
 #'
-#' @param X A matrix of predictors.
-#' @param Y A matrix of responses.
-#' @param ObjectiveFunction A function. Defaults to AIC.
-#' @param Probs A function. Defaults to Ranking.
-#' @param P An integer. Must be even.
-#' @param Initialize A vector or matrix.
-#' @param mu The mutation rate has to be a number between 0 and 1.
-#' @param Stop A function.
-#' @param Iterations An integer.
 #' @param X A n*p matrix of predictors.
 #' @param Y A n*1 matrix of responses.
 #' @param ObjectiveFunction An objective criterion/fitness function. Defaults to AIC.
@@ -25,7 +16,11 @@
 #' @param mu The mutation rate has to be a number between 0 and 1. Defaults to 1/p.
 #' @param StopFunction A stop criterion. Defaults to Stop function.
 #' @param Iterations Number of iterations.
+<<<<<<< HEAD
 #' @param nCores Number of cores to use (default to 1, no parallelisation)
+=======
+#' @param nCores Number of cores used for parallelization. Defaults to 1.
+>>>>>>> cfe050b16235eefca8a8ca0e9a7a67ff790f10f6
 #' @return Return the fittest individual in the population.
 #' @export
 #' @examples
