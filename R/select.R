@@ -16,11 +16,7 @@
 #' @param mu The mutation rate has to be a number between 0 and 1. Defaults to 1/p.
 #' @param StopFunction A stop criterion. Defaults to Stop function.
 #' @param Iterations Number of iterations.
-<<<<<<< HEAD
-#' @param nCores Number of cores to use (default to 1, no parallelisation)
-=======
 #' @param nCores Number of cores used for parallelization. Defaults to 1.
->>>>>>> cfe050b16235eefca8a8ca0e9a7a67ff790f10f6
 #' @return Return the fittest individual in the population.
 #' @export
 #' @examples
@@ -36,7 +32,7 @@
 select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
                    P = 2 * ncol(X), Initialized = Initialize(ncol(X), P),
                    mu = 1 / ncol(X), StopFunction = Stop, Iterations,
-                   nCores = 1L, ...){
+                   nCores = 1, ...){
 
   # Adaptive, if Y is a vector instead of a matrix
   Y <- matrix(Y)
