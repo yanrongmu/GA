@@ -34,15 +34,15 @@ AIC <- function(X, Y, Gen, nCores){
 
 Ranking <- function(Fitness){
   P <- length(Fitness)
-  return( 2* rank(Fitness) / (P * (P+1)) )
+  return( 2* rank(-Fitness) / (P * (P+1)) )
 }
 
 Stop <- function(FitnessLastGen, FitnessNewGen){
   # Compute the fitness of the best candidate in the previous generation
-  BestOldGen <- max(FitnessLastGen)
+  BestOldGen <- min(FitnessLastGen)
 
   # Compute the fitness of the best candidate in the new generation
-  BestNewGen <- max(FitnessNewGen)
+  BestNewGen <- min(FitnessNewGen)
 
   # Return whether the increase is smaller than 0.1%
   return( (abs((BestNewGen - BestOldGen) / BestNewGen)) < 0.001)
