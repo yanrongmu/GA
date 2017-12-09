@@ -25,6 +25,7 @@
 #' @param mu The mutation rate has to be a number between 0 and 1. Defaults to 1/p.
 #' @param StopFunction A stop criterion. Defaults to Stop function.
 #' @param Iterations Number of iterations.
+#' @param nCores Number of cores to use (default to 1, no parallelisation)
 #' @return Return the fittest individual in the population.
 #' @export
 #' @examples
@@ -40,11 +41,11 @@
 select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
                    P = 2 * ncol(X), Initialized = Initialize(ncol(X), P),
                    mu = 1 / ncol(X), StopFunction = Stop, Iterations,
-                   nCores = 1, ...){
+                   nCores = 1L, ...){
 
-  # Adaptive, if Y is a vector instead of a matrix 
+  # Adaptive, if Y is a vector instead of a matrix
   Y <- matrix(Y)
-  
+
   # Lots of checks on the variables
   Input(X, Y, ObjectiveFunction, Probs, P,
         Initialize, mu, Stop, Iterations, nCores)
@@ -52,7 +53,7 @@ select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
   #Initialize the population
   Gen <- Initialized
   FitnessGen <- ObjectiveFunction(X, Y, Gen, nCores)
-  
+
 
   # Initialize the stopping criterions
   i <- 0

@@ -4,7 +4,7 @@
 
 AIC <- function(X, Y, Gen, nCores){
   P <- nrow(Gen)
-  
+
   if(nCores ==1){
       AICPop <- rep(0, P)
     # Compute the AIC for each individual
@@ -13,17 +13,17 @@ AIC <- function(X, Y, Gen, nCores){
       lm_fit <- lm(Y ~ X[, Gen[i,]] )
       AICPop[i] <- nrow(X) * log(sum(lm_fit$residuals^2)) + 2 * sum(Gen[i,])
     }
-    
+
     # Return the AIC
     return(AICPop)
   }
-  
+
   if(nCores > 1){
     library(doParallel)
-    registerDoParallel(nCores) 
-    
+    registerDoParallel(nCores)
+
     # Compute the AIC for each individual
-    AICPop <-  <- foreach (i = 1:P) %dopar% {
+    AICPop <-  foreach (i = 1:P) %dopar% {
       # The AIC is the sum of the MSE plus the complexity penalty
       lm_fit <- lm(Y ~ X[, Gen[i,]] )
       AICPop[i] <- nrow(X) * log(sum(lm_fit$residuals^2)) + 2 * sum(Gen[i,])
@@ -36,14 +36,14 @@ Ranking <- function(Fitness){
   P <- length(Fitness)
   return( 2* rank(Fitness) / (P * (P+1)) )
 }
-  
+
 Stop <- function(FitnessLastGen, FitnessNewGen){
   # Compute the fitness of the best candidate in the previous generation
   BestOldGen <- max(FitnessLastGen)
-  
+
   # Compute the fitness of the best candidate in the new generation
   BestNewGen <- max(FitnessNewGen)
-  
+
   # Return whether the increase is smaller than 0.1%
   return( (abs((BestNewGen - BestOldGen) / BestNewGen)) < 0.001)
 }
