@@ -1,7 +1,7 @@
 ############ TEST: Select function #########
 # It performs the genetic algorithm
 
-########### Last Updated by Hector Joanne 12/7 ###################
+########### Last Updated by Joanne 12/8 ###################
 
 
 context("Select function")
