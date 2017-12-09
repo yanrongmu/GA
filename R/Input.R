@@ -49,14 +49,8 @@ Input <- function(X, Y, ObjectiveFunction, Probs, P, Initialized, mu, StopFuncti
   if( round(Iterations) != Iterations )
     stop("Iterations has to be an integer", call. = F)
 
-  # Test nCores
-<<<<<<< HEAD
-  if(!is.integer(nCores * 1L) | nCores < 1)
-    stop("nCores should be a positive integer", call. = F)
-=======
   if( !is.numeric(nCores))
     stop("nCores must be an integer", call. = F)
   if (round(nCores) != nCores )
     stop("nCores must be an integer", call. = F)
->>>>>>> cfe050b16235eefca8a8ca0e9a7a67ff790f10f6
 }
