@@ -10,7 +10,8 @@ AIC <- function(X, Y, Gen, nCores){
     # Compute the AIC for each individual
     for (i in 1:P){
       # The AIC is the sum of the MSE plus the complexity penalty
-      lm_fit <- lm(Y ~ X[, Gen[i,]] )
+      selected <- 1:ncol(X) * Gen[i,]
+      lm_fit <- lm(Y ~ X[, selected] )
       AICPop[i] <- nrow(X) * log(sum(lm_fit$residuals^2)) + 2 * sum(Gen[i,])
     }
 

@@ -65,5 +65,5 @@ select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
   }
 
   # Return the fittest individual in the population
-  return( Gen[which.max(FitnessGen), ] )
+  return( Gen[which.min(FitnessGen), ] )
 }
