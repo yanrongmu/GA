@@ -15,9 +15,12 @@
 #' @param Initialized A matrix initialized the population. Defaults to Initialize(p, P).
 #' @param mu The mutation rate has to be a number between 0 and 1. Defaults to 1/p.
 #' @param StopFunction A stop criterion. Defaults to Stop function.
-#' @param Iterations Number of iterations.
+#' @param IterationsMax The maximum number of iterations.
+#' @param IterationsMin The minimum number of iterations. Default to half of IterationsMAx
 #' @param nCores Number of cores used for parallelization. Defaults to 1.
-#' @return Return the fittest individual in the population.
+#' @return  @return A list with the elements
+#' \item{FinalGeneration}{The generation of the last iteration}
+#' \item{FittestInd}{The fittest individual of the the last iteration}
 #' @export
 #' @examples
 #' select()
@@ -31,8 +34,8 @@
 
 select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
                    P = 2 * ncol(X), Initialized = Initialize(ncol(X), P),
-                   mu = 1 / ncol(X), StopFunction = Stop, Iterations,
-                   nCores = 1, ...){
+                   mu = 1 / ncol(X), StopFunction = Stop, IterationsMax,
+                   IterationsMin = IterationsMax / 2, nCores = 1, ...){
 
   # Adaptive, if Y is a vector instead of a matrix
   Y <- matrix(Y)
@@ -51,19 +54,22 @@ select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
   Stopping <- FALSE
 
   # Run the algorithm
-  while(i < Iterations & !Stopping){
+  while(i < IterationsMax & !Stopping){
     # Span the next generation
     NewGen <- NextGen(LastGen = Gen, X, Y,
                       FitnessLastGen = FitnessGen, Probs, mu)
 
     # Check if the algorithm stops there
     FitnessNewGen <- ObjectiveFunction(X, Y, NewGen, nCores)
-    Stopping <- Stop(FitnessLastGen = FitnessGen, FitnessNewGen)
+    if(i > IterationsMin){
+      Stopping <- Stop(FitnessLastGen = FitnessGen, FitnessNewGen)
+    }
     i <- i + 1
     Gen <- NewGen
     FitnessGen <- FitnessNewGen
   }
 
   # Return the fittest individual in the population
-  return( Gen[which.min(FitnessGen), ] )
+  return( list("FinalGeneration" = Gen,
+               "FittestInd" = Gen[which.min(FitnessGen), ] ))
 }
