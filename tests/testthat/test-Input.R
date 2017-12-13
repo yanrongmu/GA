@@ -28,7 +28,7 @@ test_that("Input returns an error message when inputs are incorrect form", {
                      Initialize = Initialize,
                      mu = 1.3,
                      Stop = Stop,
-                     Iterations = 3,
+                     IterationsMax = 3,
                      nCores = 1),
                "The mutation rate has to be between 0 and 1")
   expect_error(Input(matrix(rbinom(200, 1, 0.5), nrow = 20),
@@ -39,7 +39,7 @@ test_that("Input returns an error message when inputs are incorrect form", {
                      Initialize = Initialize,
                      mu = 0.5,
                      Stop = Stop,
-                     Iterations = 3,
+                     IterationsMax = 3,
                      nCores = 1),
                "The population size has to be even")
   expect_error(Input(matrix(rbinom(200, 1, 0.5), nrow = 20),
