@@ -35,7 +35,7 @@
 select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
                    P = 2 * ncol(X), Initialized = Initialize(ncol(X), P),
                    mu = 1 / ncol(X), StopFunction = Stop, IterationsMax,
-                   IterationsMin = IterationsMax / 2, nCores = 1, ...){
+                   IterationsMin = round(IterationsMax / 2), nCores = 1, ...){
 
   # Adaptive, if Y is a vector instead of a matrix
   Y <- matrix(Y)
