@@ -15,7 +15,7 @@ test_that("Input runs when all inputs are of valid form", {
                       Initialize = Initialize,
                       mu = 0.5,
                       Stop = Stop,
-                      Iterations = 3,
+                      IterationsMax = 3,
                       nCores = 1))
 })
 
@@ -49,7 +49,7 @@ test_that("Input returns an error message when inputs are incorrect form", {
                      Initialize = Initialize,
                      mu = 0.5,
                      Stop = Stop,
-                     Iterations = 3,
+                     IterationsMax = 3,
                      nCores = 1),
                "X and Y should have the same number of observations")
 })
@@ -61,6 +61,6 @@ test_that("Input returns error when arguments are missing", {
                      Prob = Ranking, P = 8,
                      Initialize = Initialize,
                      Stop = Stop,
-                     Iterations = 3,
+                     IterationsMax = 3,
                      nCores = 1))
 })
