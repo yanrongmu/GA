@@ -35,14 +35,14 @@
 select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
                    P = 2 * ncol(X), Initialized = Initialize(ncol(X), P),
                    mu = 1 / ncol(X), StopFunction = Stop, IterationsMax,
-                   IterationsMin = round(IterationsMax / 2), nCores = 1, ...){
+                   IterationsMin = IterationsMax / 2, nCores = 1, ...){
 
   # Adaptive, if Y is a vector instead of a matrix
   Y <- matrix(Y)
 
   # Lots of checks on the variables
   Input(X, Y, ObjectiveFunction, Probs, P,
-        Initialize, mu, Stop, Iterations, nCores)
+        Initialize, mu, Stop, IterationsMax, nCores)
 
   #Initialize the population
   Gen <- Initialized
