@@ -1,7 +1,6 @@
 ############ This is the select function #########
 # It performs the genetic algorithm
-
-########### Last Updated by Hector 11/30 ###################
+########### Last Updated by Helen 12/13 ###################
 
 #' select Function
 #'
@@ -16,15 +15,21 @@
 #' @param mu The mutation rate has to be a number between 0 and 1. Defaults to 1/p.
 #' @param StopFunction A stop criterion. Defaults to Stop function.
 #' @param IterationsMax The maximum number of iterations.
-#' @param IterationsMin The minimum number of iterations. Default to half of IterationsMAx
+#' @param IterationsMin The minimum number of iterations. Default to half of IterationsMax
 #' @param nCores Number of cores used for parallelization. Defaults to 1.
-#' @return  @return A list with the elements
+#' @return A list with the elements
 #' \item{FinalGeneration}{The generation of the last iteration}
 #' \item{FittestInd}{The fittest individual of the the last iteration}
 #' @export
 #' @examples
-#' select()
-#'
+#' X <- matrix(rnorm(30 * 100), ncol = 30)
+#' beta <- 100 * rnorm(10)
+#' select <- sample(1:ncol(X), size = 10, replace = F)
+#' Y <- X[,select] %*% matrix(beta, ncol = 1) + rnorm(100)
+#' beta1 <- select(X, Y, IterationsMax = 200)
+#' sum(lm(Y ~X [,select])$residuals^2)
+#' sum(lm(Y ~X [,1:ncol(X)*beta1$FittestInd])$residuals^2)
+
 
 # library("stats")
 # source("Default.R")

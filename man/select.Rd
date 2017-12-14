@@ -6,7 +6,8 @@
 \usage{
 select(X, Y, ObjectiveFunction = AIC, Probs = Ranking, P = 2 * ncol(X),
   Initialized = Initialize(ncol(X), P), mu = 1/ncol(X),
-  StopFunction = Stop, Iterations, nCores = 1, ...)
+  StopFunction = Stop, IterationsMax, IterationsMin = IterationsMax/2,
+  nCores = 1, ...)
 }
 \arguments{
 \item{X}{A n*p matrix of predictors.}
@@ -25,17 +26,26 @@ select(X, Y, ObjectiveFunction = AIC, Probs = Ranking, P = 2 * ncol(X),
 
 \item{StopFunction}{A stop criterion. Defaults to Stop function.}
 
-\item{Iterations}{Number of iterations.}
+\item{IterationsMax}{The maximum number of iterations.}
+
+\item{IterationsMin}{The minimum number of iterations. Default to half of IterationsMax}
 
 \item{nCores}{Number of cores used for parallelization. Defaults to 1.}
 }
 \value{
-Return the fittest individual in the population.
+A list with the elements
+\item{FinalGeneration}{The generation of the last iteration}
+\item{FittestInd}{The fittest individual of the the last iteration}
 }
 \description{
 This function implement a genetic algorithm for variable selection in regression problems.
 }
 \examples{
-select()
-
+X <- matrix(rnorm(30 * 100), ncol = 30)
+beta <- 100 * rnorm(10)
+select <- sample(1:ncol(X), size = 10, replace = F)
+Y <- X[,select] \%*\% matrix(beta, ncol = 1) + rnorm(100)
+beta1 <- select(X, Y, IterationsMax = 200)
+sum(lm(Y ~X [,select])$residuals^2)
+sum(lm(Y ~X [,1:ncol(X)*beta1$FittestInd])$residuals^2)
 }
