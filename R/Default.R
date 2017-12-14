@@ -1,7 +1,5 @@
 ############ Those are the default functions #########
 
-########### Last Updated by Hector 11/30 ###################
-
 AIC <- function(X, Y, Gen, nCores){
   P <- nrow(Gen)
 

@@ -3,8 +3,6 @@
 # Return a list of two P/2 by n matrices Each row correspond to a parent 
 # that match the parent of the same row from the other dataframe
 
-########### Last Updated by Hector 11/30 ############
-
 ParentSelection <- function(LastGen, X, Y, FitnessLastGen, Probs){
   P <- nrow(LastGen)
   

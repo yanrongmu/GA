@@ -1,8 +1,6 @@
 ############ This is the mutation function #########
 # It mutates the kids genome after crossover
 
-########### Last Updated by Hector 11/27 ############
-
 Mutation <- function(Kids, mu){
   P <- nrow(Kids)
   p <- ncol(Kids)

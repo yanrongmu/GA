@@ -2,9 +2,6 @@
 # It performs the crossover that produces the kid population from 
 # the parent population
 
-########### Last Updated by Hector 11/27 ############
-
-
 Crossover <- function(Parents){
   # Takes as input the pairs of parents
   Parent1 <- Parents$Parent1

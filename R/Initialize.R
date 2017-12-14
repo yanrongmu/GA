@@ -1,5 +1,4 @@
 ############ This is the Initialize function #########
-########### Last Updated by Hector 11/30 ###################
 
 Initialize <- function(p, P) {
   # Create matrix with P rows and p columns

@@ -1,8 +1,6 @@
 ############ This is the Input function #########
 # It checks wheter the input to the global function are of the correct form
 
-########### Last Updated by Hector 11/30 ###################
-
 Input <- function(X, Y, ObjectiveFunction, Probs, P, Initialized, mu, StopFunction, IterationsMax, nCores){
   # Test X
   if( !is.matrix(X) )  stop("X has to be a matrix of numbers", call. = F)
