@@ -50,8 +50,8 @@ select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
         Initialize, mu, Stop, IterationsMax, nCores)
 
   #Initialize the population
-  GenInit <- Initialized
-  FitnessGen <- ObjectiveFunction(X, Y, Gen = GenInit, nCores)
+  Gen <- Initialized
+  FitnessGen <- ObjectiveFunction(X, Y, Gen, nCores)
 
 
   # Initialize the stopping criterions
@@ -61,7 +61,7 @@ select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
   # Run the algorithm
   while(i < IterationsMax & !Stopping){
     # Span the next generation
-    NewGen <- NextGen(LastGen = GenInit, X, Y,
+    NewGen <- NextGen(LastGen = Gen, X, Y,
                       FitnessLastGen = FitnessGen, Probs, mu)
 
     # Check if the algorithm stops there
