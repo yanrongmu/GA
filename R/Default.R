@@ -11,8 +11,14 @@ AIC <- function(X, Y, Gen, nCores){
     for (i in 1:P){
       # The AIC is the sum of the MSE plus the complexity penalty
       selected <- 1:ncol(X) * Gen[i,]
-      lm_fit <- lm(Y ~ X[, selected] )
-      AICPop[i] <- nrow(X) * log(sum(lm_fit$residuals^2)) + 2 * sum(Gen[i,])
+      if (sum(selected == 0)){
+        # If no parameters are selected we fit the average
+        AICPop[i] <- nrow(X) * log(sum( (Y- mean(Y))^2 )) + 2 * sum(Gen[i,])
+      } else {
+        # Else wo do the fit
+        lm_fit <- lm(Y ~ X[, selected] )
+        AICPop[i] <- nrow(X) * log(sum(lm_fit$residuals^2)) + 2 * sum(Gen[i,])
+      }
     }
 
     # Return the AIC
@@ -25,9 +31,15 @@ AIC <- function(X, Y, Gen, nCores){
 
     # Compute the AIC for each individual
     AICPop <- foreach (i = 1:P) %dopar% {
-      # The AIC is the sum of the MSE plus the complexity penalty
-      lm_fit <- lm(Y ~ X[, Gen[i,]] )
-      AICInd <- nrow(X) * log(sum(lm_fit$residuals^2)) + 2 * sum(Gen[i,])
+      selected <- 1:ncol(X) * Gen[i,]
+      if (sum(selected == 0)){
+        # If no parameters are selected we fit the average
+        AICInd <- nrow(X) * log(sum( (Y- mean(Y))^2 )) + 2 * sum(Gen[i,])
+      } else {
+        # Else wo do the fit
+        lm_fit <- lm(Y ~ X[, selected] )
+        AICInd <- nrow(X) * log(sum(lm_fit$residuals^2)) + 2 * sum(Gen[i,])
+      }
       AICInd
     }
     return(unlist(AICPop))
