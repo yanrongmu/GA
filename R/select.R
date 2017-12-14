@@ -51,7 +51,7 @@ select <- function(X, Y, ObjectiveFunction = AIC, Probs = Ranking,
 
   #Initialize the population
   Gen <- Initialized
-  FitnessGen <- ObjectiveFunction(X, Y, Gen = GenInit, nCores)
+  FitnessGen <- ObjectiveFunction(X, Y, Gen, nCores)
 
 
   # Initialize the stopping criterions
