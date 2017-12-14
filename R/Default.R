@@ -27,7 +27,8 @@ AIC <- function(X, Y, Gen, nCores){
     AICPop <- foreach (i = 1:P) %dopar% {
       # The AIC is the sum of the MSE plus the complexity penalty
       lm_fit <- lm(Y ~ X[, Gen[i,]] )
-      AICPop[i] <- nrow(X) * log(sum(lm_fit$residuals^2)) + 2 * sum(Gen[i,])
+      AICInd <- nrow(X) * log(sum(lm_fit$residuals^2)) + 2 * sum(Gen[i,])
+      AICInd
     }
     return(unlist(AICPop))
   }
