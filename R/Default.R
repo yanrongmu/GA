@@ -9,7 +9,7 @@ AIC <- function(X, Y, Gen, nCores){
     for (i in 1:P){
       # The AIC is the sum of the MSE plus the complexity penalty
       selected <- 1:ncol(X) * Gen[i,]
-      if (sum(selected == 0)){
+      if (sum(selected) == 0){
         # If no parameters are selected we fit the average
         AICPop[i] <- nrow(X) * log(sum( (Y- mean(Y))^2 )) + 2 * sum(Gen[i,])
       } else {
