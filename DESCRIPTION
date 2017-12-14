@@ -1,11 +1,10 @@
 Package: GA
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Implement A Genetic Algorithm For Variable Selection In Regression Problems
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Authors: Yanrong Mu, Hector Roux de Bezieux, Joanne Wu, Hsieh Cheng Han
+Description: Given matrix of predictors X and matrix of responses Y,
+    using objective function, which defaults to AIC, to find the fittest variable selection in regression problems.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
